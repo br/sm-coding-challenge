@@ -18,6 +18,7 @@ Currently this project has an 'IDataProvider' interface that has a a single meth
 ## Requirements
 
 * All urls on the home page should return without error
+* Update the DataProvider interface and implementation to use async/await
 * Add missing player attributes to the fetch so all data from the data provider is returned to the front-end
 * Duplicates should be removed from the existing GetPlayers result(s)
 * Implement the "LatestPlayers" method to return a structure similar to: https://gist.githubusercontent.com/RichardD012/a81e0d1730555bc0d8856d1be980c803/raw/3fe73fafadf7e5b699f056e55396282ff45a124b/output.json
