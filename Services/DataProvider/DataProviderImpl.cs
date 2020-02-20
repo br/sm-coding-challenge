@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Net.Http;
 using Newtonsoft.Json;
@@ -7,6 +8,8 @@ namespace sm_coding_challenge.Services.DataProvider
 {
     public class DataProviderImpl : IDataProvider
     {
+        public static TimeSpan Timeout = TimeSpan.FromSeconds(30);
+
         public PlayerModel GetPlayerById(string id)
         {
             var handler = new HttpClientHandler()
@@ -15,6 +18,7 @@ namespace sm_coding_challenge.Services.DataProvider
             };
             using (var client = new HttpClient(handler))
             {
+                client.Timeout = Timeout;
                 var response = client.GetAsync("https://gist.githubusercontent.com/RichardD012/a81e0d1730555bc0d8856d1be980c803/raw/3fe73fafadf7e5b699f056e55396282ff45a124b/basic.json").Result;
                 var stringData = response.Content.ReadAsStringAsync().Result;
                 var dataResponse = JsonConvert.DeserializeObject<DataResponseModel>(stringData, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Auto });
