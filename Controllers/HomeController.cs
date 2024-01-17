@@ -24,25 +24,27 @@ namespace sm_coding_challenge.Controllers
         }
 
         [HttpGet]
-        public IActionResult Player(string id)
+        public async Task<IActionResult> Player(string id)
         {
-            return Json(_dataProvider.GetPlayerById(id));
+            return Json(await _dataProvider.GetPlayerById(id));
         }
 
         [HttpGet]
-        public IActionResult Players(string ids)
+        public async Task<IActionResult> Players(string id)
         {
-            var idList = ids.Split(',');
+            // dee : We should remove duplicated Ids fetched
+            var idList = id.Split(',').Distinct();
+
             var returnList = new List<PlayerModel>();
-            foreach (var id in idList)
+            foreach (var anId in idList)
             {
-                returnList.Add(_dataProvider.GetPlayerById(id));
+                returnList.Add(await _dataProvider.GetPlayerById(anId));
             }
             return Json(returnList);
         }
 
         [HttpGet]
-        public IActionResult LatestPlayers(string ids)
+        public IActionResult LatestPlayers(string id)
         {
             throw new NotImplementedException("Method Needs to be Implemented");
         }
